@@ -1,0 +1,161 @@
+version: '3'
+
+# to setup the network, run `docker network create proxynet`
+networks:
+  default:
+    external:
+      name: proxynet
+
+version: '3'
+ 
+services:
+  lcl-registry:
+    image: registry:latest
+    container_name: lcl-registry
+    volumes:
+      - vol/registry:/var/lib/registry
+    ports:
+      - "50000:5000"
+    restart: unless-stopped
+volumes:
+  registry:
+
+services:
+  proxy:   
+    image: casmacc/nginx_proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+    volumes:
+      - ./vol_conf/proxy/certs:/etc/nginx/certs
+      - ./vol_conf/proxy/conf.d:/etc/nginx/conf.d
+      - ./vol_conf/proxy/vhost.d:/etc/nginx/vhost.d
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  home_bt: 
+    image: casmacc/nginx_html
+    volumes:
+      - ./vol_conf/html_bt:/usr/share/nginx/html
+    ports:
+      - "3090:80"
+    restart: unless-stopped
+    environment:
+      VIRTUAL_HOST: bugmark.tech
+      HTTPS_METHOD: noredirect
+
+  s1:      
+    image: casmacc/sinatra_helloworld
+    ports:
+      - "4090:3090"
+    restart: unless-stopped
+    environment:
+      VIRTUAL_HOST: s1.bugmark.tech
+      HTTPS_METHOD: noredirect
+
+  p1:     
+    image: casmacc/phoenix_helloworld
+    ports:
+      - "4091:4000"
+    restart: unless-stopped
+    environment:
+      VIRTUAL_HOST: p1.bugmark.tech
+      HTTPS_METHOD: noredirect
+
+  chat:
+    image: casmacc/ssh-chat
+    volumes:
+      - ./vol_conf/ssh_chat:/root/.ssh
+    ports:
+      - "9000:2022"
+    restart: unless-stopped
+
+  home_cn:
+    image: casmacc/nginx_html
+    volumes:
+      - ./vol_conf/html_cn:/usr/share/nginx/html
+    ports:
+      - "3091:80"
+    restart: unless-stopped
+    environment:
+      VIRTUAL_HOST: casmacc.net
+      HTTPS_METHOD: noredirect
+
+  files:   
+    image: casmacc/nginx_files
+    volumes:
+      - ./vol_data/files:/usr/share/nginx/files
+    ports:
+      - "8881:80"
+    restart: unless-stopped
+    environment:
+      VIRTUAL_HOST: files.casmacc.net
+      HTTPS_METHOD: noredirect
+
+  bma: 
+    image: akleak/bma
+    ports:
+      - "8882:4000"
+    restart: unless-stopped
+    environment:
+      VIRTUAL_HOST: bma.bugmark.tech
+      HTTPS_METHOD: noredirect
+
+  ledemo_rel:
+    image: akleak/ledemo_rel
+    ports: 
+      - "5090:5090"
+    environment:
+      VIRTUAL_HOST: live-editable.casmacc.net
+      HTTPS_METHOD: noredirect
+
+  feedex:
+    image: qoomon/docker-host
+    restart: on-failure
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    expose:
+      - "5060"
+    environment:
+      VIRTUAL_HOST: feedex.casmacc.net
+      HTTPS_METHOD: noredirect
+
+  jobex:
+    image: qoomon/docker-host
+    restart: on-failure
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    expose:
+      - "5070"
+    environment:
+      VIRTUAL_HOST: jobex.casmacc.net
+      HTTPS_METHOD: noredirect
+
+  badger:
+    image: qoomon/docker-host
+    restart: on-failure
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    expose:
+      - "5020"
+    environment:
+      VIRTUAL_HOST: badger.casmacc.net
+      HTTPS_METHOD: noredirect
+
+  influx-tcp:
+    image: qoomon/docker-host
+    restart: on-failure
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    expose:
+      - "8086"
+    environment:
+      VIRTUAL_HOST: influx-tcp.casmacc.net
+      HTTPS_METHOD: noredirect
+
+  grafana:
+    image: qoomon/docker-host
+    restart: on-failure
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    expose:
+      - "3030"
+    environment:
+      VIRTUAL_HOST: grafana.casmacc.net
+      HTTPS_METHOD: noredirect
+
