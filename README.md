@@ -41,9 +41,9 @@ Compose files for various environments and applications
 ## Docker Commands
 
 Aliases: 
-- `dk<tab>`
-- `dkc<tab>`
-- `lazydocker - lzd`
+- `dk<tab>`  | docker commands
+- `dkc<tab>` | docker compose commands
+- `lzd`      | lazydocker
 
 | Command                             | Description               |
 |-------------------------------------|---------------------------|
