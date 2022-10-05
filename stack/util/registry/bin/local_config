@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+USRNAME=$(whoami)
+
+sudo mkdir -p /usr/share/nginx
+
+sudo chown -R $USRNAME:$USRNAME /usr/share/nginx
+
+# ln -sf ${PWD}/vol_data/files /usr/share/nginx/cblob
+# ln -sf ${PWD}/vol_data/bmxdoc /usr/share/nginx/bmxdoc
+

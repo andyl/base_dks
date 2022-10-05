@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  influx1:      
+    image: influxdb:1.8
+    container_name: influx1
+    ports: 
+      - "8083:8083"
+      - "8086:8086"
+      - "8088:8088"
+      - "8089:8089"
+    volumes: 
+      - ./conf/influxdb.conf:/etc/influxdb/influxdb.conf
+      - ~/var/data/dks/$SYSNAME/tsdb/influx1:/var/lib/influxdb

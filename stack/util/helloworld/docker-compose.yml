@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  sinatra_helloworld:      
+    image: casmacc/sinatra_helloworld
+    ports:
+      - "55090:3090"
+
+  phoenix_helloworld:     
+    image: casmacc/phoenix_helloworld
+    ports:
+      - "55091:4000"
+

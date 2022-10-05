@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# setup network and volumes 
+docker network create monitoring 
+docker volume create grafana-volume
+docker volume create influxdb-volume
+
+# to check:
+# docker network ls
+# docker volume ls
+
+# setup users 
+docker run --rm \
+  -e INFLUXDB_DB=telegraf -e INFLUXDB_ADMIN_ENABLED=true \
+  -e INFLUXDB_ADMIN_USER=admin \
+  -e INFLUXDB_ADMIN_PASSWORD=supersecretpassword \
+  -e INFLUXDB_USER=telegraf -e INFLUXDB_USER_PASSWORD=secretpassword \
+  -v influxdb-volume:/var/lib/influxdb \
+  influxdb:1.8 /init-influxdb.sh
