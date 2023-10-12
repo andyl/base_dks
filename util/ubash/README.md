@@ -1,6 +1,8 @@
-# Docker Compose - Netutil 
+# Docker Compose / Util / Ubash 
 
-Basic resource for testing Docker networking. 
+Micro-Bash / Minimal Ubuntu Image with Networking Tools 
+
+Use to test Docker networking. 
 
 Follow the commands under `bin/` to get started...
 

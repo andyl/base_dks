@@ -2,8 +2,8 @@ version: "3"
 
 services: 
   tgt1: 
-    image: uplus
+    image: ubash 
 
   tgt2: 
-    image: uplus
+    image: ubash 
 
