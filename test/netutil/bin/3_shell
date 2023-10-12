@@ -1,0 +1,9 @@
+#!/usr/bin/env bash 
+
+echo "start the bash shell on the first container" 
+echo ""
+echo "once in:" 
+echo "  ping the other container    | `ping tgt2`" 
+echo "  view the network interfaces |  `ifconfig`" 
+
+docker exec -it netutil-tgt1-1 bash 

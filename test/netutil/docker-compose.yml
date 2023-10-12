@@ -1,0 +1,9 @@
+version: "3" 
+
+services: 
+  tgt1: 
+    image: uplus
+
+  tgt2: 
+    image: uplus
+
