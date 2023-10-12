@@ -8,5 +8,6 @@ RUN apt update -y
 RUN apt install aptitude net-tools iputils-ping -y -q 
 
 # make the container run indefinately.
+# see https://stackoverflow.com/questions/60260437/running-a-ubuntu-container-in-background-using-docker-compose
 # start a bash shell on the container using `docker exec -it <image> bash`
 CMD ["sleep", "infinity"]
