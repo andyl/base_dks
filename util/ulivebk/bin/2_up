@@ -1,0 +1,5 @@
+#!/usr/bin/env bash 
+
+# start the compose stack 
+
+docker compose up  
