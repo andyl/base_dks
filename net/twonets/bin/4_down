@@ -1,0 +1,4 @@
+#!/usr/bin/env bash 
+
+cd tn1 && docker compose down --force  && cd .. 
+cd tn2 && docker compose down --force  && cd .. 

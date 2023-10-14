@@ -1,0 +1,4 @@
+#!/usr/bin/env bash 
+
+cd tn1 && docker compose up  && cd .. 
+cd tn2 && docker compose up  && cd .. 

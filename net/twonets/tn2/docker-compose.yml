@@ -1,0 +1,17 @@
+version: "3" 
+
+networks: 
+  twonets1_twonet: 
+    external: true
+
+services: 
+  three: 
+    image: ubash 
+    hostname: three
+    networks: 
+      twonets1_twonet: 
+
+  four: 
+    image: ubash 
+    hostname: four 
+

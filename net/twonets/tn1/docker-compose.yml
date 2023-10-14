@@ -1,0 +1,21 @@
+version: "3" 
+
+networks: 
+  base: 
+  twonet: 
+    driver: bridge 
+
+services: 
+  one: 
+    image: ubash 
+    hostname: one 
+    networks: 
+      twonet: 
+      base: 
+
+  two: 
+    image: ubash 
+    hostname: two
+    networks: 
+      base: 
+

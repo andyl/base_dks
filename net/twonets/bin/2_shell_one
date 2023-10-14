@@ -1,0 +1,3 @@
+#!/usr/bin/env bash 
+
+docker exec -it tn1-one-1 bash 
