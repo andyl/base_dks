@@ -2,8 +2,7 @@
 
 Docker registry service.
 
-This is a private repo.
+This establishes a private repo for Docker Images.
 
-## References
 
 
