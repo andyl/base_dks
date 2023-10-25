@@ -1,0 +1,3 @@
+# Media Wiki 
+
+MediaWiki Install 
